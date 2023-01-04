@@ -86,7 +86,7 @@ public class Triangle {
     }
 
 
-    public double[] FindBarC (Point pointZ) {
+    public double[] findBarC(Point pointZ) {
         double[] barC = {0, 0, 0};
         int[] pointVector = {pointZ.getX() - pointC.getX(), pointZ.getY() - pointC.getY()};
         int[][] matrix = {{pointA.getX() - pointC.getX(), pointB.getX() - pointC.getX()},

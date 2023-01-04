@@ -34,33 +34,18 @@ public class Rasterization {
     private static void paintPoints(Triangle triangle, int y, int leftEdge, int rightEdge, PixelWriter pw) {
 
         for (int x = leftEdge; x <= rightEdge; x++) {
-            double[] barC = triangle.FindBarC(new Point(x, y, null));
+            double[] barC = triangle.findBarC(new Point(x, y, null));
             double red = barC[0] * triangle.getPointA().getColor().getRed() +
                     barC[1] * triangle.getPointB().getColor().getRed() +
                     barC[2] * triangle.getPointC().getColor().getRed();
-            if (red > 1) {
-                red = 1;
-            }
-            if (red < 0) {
-                red = 0;
-            }
             double green = barC[0] * triangle.getPointA().getColor().getGreen() +
                     barC[1] * triangle.getPointB().getColor().getGreen() +
                     barC[2] * triangle.getPointC().getColor().getGreen();
-            if (green > 1) {
-                green = 1;
-            }
-            if (green < 0) {
-                green = 0;
-            }
             double blue = barC[0] * triangle.getPointA().getColor().getBlue() +
                     barC[1] * triangle.getPointB().getColor().getBlue() +
                     barC[2] * triangle.getPointC().getColor().getBlue();
-            if (blue > 1) {
-                blue = 1;
-            }
-            if (blue < 0) {
-                blue = 0;
+            if (red > 1 || red < 0 || green > 1 || green < 0 || blue > 1 || blue < 0) {
+                continue;
             }
             Color color = new Color(red, green, blue, 1);
             pw.setColor(x, y, color);
